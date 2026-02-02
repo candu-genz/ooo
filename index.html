@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Love Me</title>
+
+<style>
+@keyframes float {
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+  100%{transform:translateY(0);}
+}
+
+@keyframes pop {
+  0%{transform:scale(0);}
+  100%{transform:scale(1);}
+}
+
+@keyframes shake {
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(120deg,#020024,#090979,#ff5c8a);
+  overflow:hidden;
+  font-family:Poppins,sans-serif;
+}
+
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+
+.card{
+  background:white;
+  width:380px;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 0 30px rgba(255,92,138,0.6);
+  animation:pop 1s ease;
+}
+
+img{
+  width:200px;
+}
+
+h2{
+  margin:15px 0;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#yes{
+  background:#ff5c8a;
+  color:white;
+}
+
+#yes:hover{
+  transform:scale(1.1);
+}
+
+#no{
+  background:#ffc0cb;
+  color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img id="gif"
+src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif">
+
+<h2 id="text">Do you love me? 💘🥰</h2>
+
+<div class="buttons">
+<button id="yes">Yes 💖</button>
+<button id="no">No 😅</button>
+</div>
+
+</div>
+
+<script>
+
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const text=document.getElementById("text");
+const gif=document.getElementById("gif");
+
+// floating hearts
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML=["💖","💘","💕","❤️","😍"][Math.floor(Math.random()*5)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.top="100vh";
+  document.body.appendChild(h);
+
+  setTimeout(()=>{h.remove()},5000);
+},300);
+
+// NO button runs away
+no.addEventListener("mouseover",()=>{
+  no.style.position="absolute";
+  no.style.left=Math.random()*300+"px";
+  no.style.top=Math.random()*300+"px";
+  no.style.animation="shake 0.3s";
+});
+
+// YES clicked
+yes.addEventListener("click",()=>{
+  text.innerHTML="I knew it 😍💖";
+  gif.src="https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif";
+  no.style.display="none";
+
+  // burst hearts
+  for(let i=0;i<30;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="🎉💖";
+    h.style.left="50%";
+    h.style.top="50%";
+    document.body.appendChild(h);
+    setTimeout(()=>{h.remove()},3000);
+  }
+});
+
+</script>
+
+</body>
+</html>
